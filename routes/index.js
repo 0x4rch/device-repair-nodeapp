@@ -8,13 +8,13 @@ var router = express.Router();
 var firebase = require("firebase/app");
 
 var firebaseConfig = {
-    apiKey: "AIzaSyDCnVxaWF0n3nBHhq9QVsZHvAdmErBhaEA",
-    authDomain: "repair-logs.firebaseapp.com",
-    databaseURL: "https://repair-logs.firebaseio.com",
-    projectId: "repair-logs",
-    storageBucket: "repair-logs.appspot.com",
-    messagingSenderId: "406517171908",
-    appId: "1:406517171908:web:d117940f943cb95c272b91"
+    apiKey: "",
+    authDomain: "",
+    databaseURL: "",
+    projectId: "",
+    storageBucket: "",
+    messagingSenderId: "",
+    appId: ""
   };
 firebase.initializeApp(firebaseConfig);
 // Add the Firebase products that you want to use
