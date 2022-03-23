@@ -1,0 +1,59 @@
+extends dashboardNav
+
+block layout-content
+  // Header
+  .header.bg-gradient-primary.pb-8.pt-5.pt-md-8
+    .container-fluid
+      .header-body
+        // Card stats
+        .row
+          .col-xl-3.col-lg-6
+            .card.card-stats.mb-4.mb-xl-0
+              .card-body
+                .row
+                  .col
+                    h5.card-title.text-uppercase.text-muted.mb-0 Posts
+                    span.h2.font-weight-bold.mb-0 #{posts.length}
+                  .col-auto
+                    .icon.icon-shape.bg-danger.text-white.rounded-circle.shadow
+                      i.fas.fa-chart-bar
+          .col-xl-3.col-lg-6
+            .card.card-stats.mb-4.mb-xl-0
+              .card-body
+                .row
+                  .col
+                    h5.card-title.text-uppercase.text-muted.mb-0 Comments
+                    span.h2.font-weight-bold.mb-0 0
+                  .col-auto
+                    .icon.icon-shape.bg-warning.text-white.rounded-circle.shadow
+                      i.fas.fa-chart-pie
+  .container-fluid.mt--7
+    .row.mt-5
+      .col-xl-12.mb-12.mb-xl-0
+        .card.shadow
+          .card-header.border-0
+            .row.align-items-center
+              .col
+                h3.mb-0 Posts
+              .col.text-right
+                a.btn.btn-sm.btn-primary(href='#!') See all
+          .table-responsive
+            // Projects table
+            table.table.align-items-center.table-flush
+              thead.thead-light
+                tr
+                  th(scope='col') Device
+                  th(scope='col') Issue
+                  th(scope='col') Description
+              each post in posts
+                tbody
+                  tr
+                    th(scope='row')
+                      a(href="/viewPost?postID=" + post.id) #{post.device}
+                    td
+                      | #{post.issue}
+                    td
+                      | #{post.description}
+
+                
+      

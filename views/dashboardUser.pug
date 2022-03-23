@@ -1,0 +1,62 @@
+extends dashboardNav
+
+block layout-content
+  // Header
+  .header.pb-8.pt-5.pt-lg-8.d-flex.align-items-center(style='min-height: 600px; background-image: url(../assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;')
+    // Mask
+    span.mask.bg-gradient-default.opacity-8
+    // Header container
+    .container-fluid.d-flex.align-items-center
+      .row
+        .col-lg-7.col-md-10
+          h1.display-2.text-white Hello #{userProfile.fullName}
+          p.text-white.mt-0.mb-5
+            | This is your profile page. You can see posts you have made here and edit your acccount
+          a.btn.btn-info(href='#!') Edit profile
+  // Page content
+  .container-fluid.mt--7
+    .row
+      .col-xl-4.order-xl-2.mb-5.mb-xl-0
+        .card.card-profile.shadow
+          .row.justify-content-center
+            .col-lg-3.order-lg-2
+              .card-profile-image
+                a(href='#')
+                  img.rounded-circle(src='../assets/img/theme/team-4-800x800.jpg')
+          .card-header.text-center.border-0.pt-8.pt-md-4.pb-0.pb-md-4
+            .d-flex.justify-content-between
+          .card-body.pt-0.pt-md-4
+            .row
+              .col
+                .card-profile-stats.d-flex.justify-content-center.mt-md-5
+                  div
+                    span.heading #{posts.length}
+                    span.description Posts
+                  div
+                    span.heading 89
+                    span.description Comments
+            .text-center
+              h3
+                | #{userProfile.fullName}
+      .col-xl-8.order-xl-1
+        .card.bg-secondary.shadow
+          .card-header.bg-white.border-0
+            .row.align-items-center
+              .col-8
+                h3.mb-0 My account
+              .col-4.text-right
+                a.btn.btn-sm.btn-primary(href='#!') Settings
+          .card-body
+            form
+              h6.heading-small.text-muted.mb-4 User information
+              .pl-lg-4
+                .row
+                  .col-lg-6
+                    .form-group
+                      label.form-control-label(for='input-username') Username
+                      input#input-username.form-control.form-control-alternative(type='text', placeholder='Username', value=userProfile.displayName)
+                  .col-lg-6
+                    .form-group
+                      label.form-control-label(for='input-email') Email address
+                      input#input-email.form-control.form-control-alternative(type='email', value=userProfile.email)
+              hr.my-4

@@ -1,0 +1,31 @@
+extends dashboardNav
+
+block layout-content
+  .container-fluid.register
+   .row
+     form.col-md-3.register-left(method="GET", action="/login")
+       img(src='https://image.ibb.co/n7oTvU/logo_white.png', alt='')
+       h3 Welcome
+       p Please fill out all of the required fields
+       br
+     .col-md-9.register-right
+       #myTabContent.tab-content
+         #home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='home-tab')
+           h3.register-heading Register
+           form.row.register-form(method="POST", action="/register")
+             .col-md-12
+               .row
+                 .form-group.col-md-12
+                   input.form-control(name="fullName", type='text', placeholder='Full Name *', value='')
+               .row
+                 .form-group.col-md-6
+                   input.form-control(name="username", type='text', placeholder='Username *', value='')
+                 .form-group.col-md-6
+                   input.form-control(name="companyName", type='text', placeholder='Company ', value='')
+               .form-group
+                   input.form-control(name="email", type='email', placeholder='Email *', value='')
+               .form-group
+                 input.form-control(name="password", type='password', placeholder='Password *', value='')
+               .form-group
+                 input.form-control(name="password2", type='password', placeholder='Confirm Password *', value='')
+               input.btnRegister(type='submit', value='Register')

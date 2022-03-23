@@ -1,0 +1,24 @@
+extends dashboardNav
+
+block layout-content
+ .main-content
+  .container-fluid.register
+   .row
+     form.col-md-3.register-left(method="GET", action="/register")
+       img(src='https://image.ibb.co/n7oTvU/logo_white.png', alt='')
+       h3 Welcome
+       p We're so glad you're back!
+       br
+     .col-md-9.register-right
+       #myTabContent.tab-content
+         #home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='home-tab')
+           h3.register-heading Login
+           form.row.register-form(method="POST", action="/login")
+             .col-md-4
+             .col-md-4
+               .form-group
+                   input.form-control(name="email", type='email', placeholder='Email *', value='')
+               .form-group
+                 input.form-control(name="password", type='password', placeholder='Password *', value='')
+               input.btnRegister(type='submit', value='Login')
+             .col-md-4 

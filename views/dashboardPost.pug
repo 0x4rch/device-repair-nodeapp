@@ -1,0 +1,143 @@
+extends dashboardNav
+
+block layout-content
+  .header.bg-gradient-primary.pb-7.pt-4.pt-md-7
+  .container-fluid.mt--6
+    .col-md-12.card.bg-default.shadow
+      .card-header.bg-default.border-0
+        h1.text-center.text-white Post
+      form.card-body.row.register-form(method="POST", action="/post")
+       .col-md-12
+         .row
+           .col-md-4.form-group#brandColumn
+             select.form-control#brandDropdown(onChange="changecat(this.value);")
+               option(value="Other") Please select a brand
+               option(value="Apple") Apple
+               option(value="Samsung") Samsung
+               option(value="Microsoft") Microsoft
+               option(value="Sony") Sony
+               option(value="Nintendo") Nintendo
+               option(value="Other") Other
+           .col-md-4.form-group#deviceColumn
+             select.form-control#deviceDropdown(onChange="changeDevice(this.value);")
+               option 
+           .col-md-4.form-group#specificDeviceColumn
+             select.form-control#specificDeviceDropdown(onChange="changeSpecificDevice(this.value);")
+               option 
+         .row
+           .col-md-12.form-group
+             input.form-control(name="issue", placeholder='General Issue *', value='')
+         .row
+           .col-md-12.form-group
+             textarea(rows="15", name="issueDescription", placeholder='Issue Description *', value='').form-control
+         .row.align-items-center
+           .col-md-4.form-group
+           .col-md-4.form-group
+             input.btn.text-center.btn-primary.btn-block(type='submit', value='Post')
+           .col-md-4.form-group
+  script(type='text/javascript').
+    var deviceByBrand = {
+      Apple: ["Please Select a device type", "iPhone", "iPad", "iPadAir", "iPadPro", "Macbook", "MacbookPro", "MacbookAir"],
+      Samsung: ["Please Select a device type", "Galaxy", "Note"],
+      Microsoft: ["Please Select a device type", "Xbox"],
+      Sony: ["Please Select a device type", "PlayStation"],
+      Nintendo: ["Please Select a device type", "Switch", "DS"],
+    }
+
+    var deviceByAppleCategory = {
+      iPhone: ["iPhone", "iPhone 3G", "iPhone 3GS", "iPhone 4", "iPhone 4S", "iPhone 5", "iPhone 5c", "iPhone 5s", "iPhone 6", "iPhone 6 Plus", "iPhone 6s", "iPhone 6s Plus", "iPhone SE", "iPhone 7", "iPhone 7 Plus", "iPhone 8", "iPhone 8 Plus", "iPhone X", "iPhone XR", "iPhone XS", "iPhone XS Max", "iPhone 11", "iPhone 11 Pro", "iPhone 11 Pro Max", "Other"],
+      iPad: ["iPad", "iPad 2", "iPad (3rd generation)", "iPad (4th generation)", "iPad (5th generation)", "iPad (6th generation)", "iPad (7th generation)"],
+      iPadAir: ["iPad Air", "iPad Air 2", "iPad Air (3rd generation)"],
+      iPadPro: ["iPad Pro (12.9-inch)", "iPad Pro (9.7-inch)", "iPad Pro (12.9-inch) (2nd generation)", "iPad Pro (10.5-inch)", "iPad Pro (11-inch)", "iPad Pro (12.9-inch) (3rd generation)"],
+      Macbook: ["MacBook (13-inch, Early 2009)", "MacBook (13-inch, Mid 2009)", "MacBook (13-inch, Late 2009)", "MacBook (13-inch, Mid 2010)", "MacBook (Retina, 12-inch, Early 2015)", "MacBook (Retina, 12-inch, Early 2016)", "MacBook (Retina, 12-inch, 2017)"],
+      MacbookPro: ["MacBook Pro (16-inch, 2019)", "MacBook Pro (13-inch, 2019, Two Thunderbolt 3 ports)", "MacBook Pro (15-inch, 2019)", "MacBook Pro (13-inch, 2019, Four Thunderbolt 3 ports)", "MacBook Pro (15-inch, 2018)", "MacBook Pro (13-inch, 2018, Four Thunderbolt 3 ports)", "MacBook Pro (15-inch, 2017)", "MacBook Pro (13-inch, 2017, Four Thunderbolt 3 ports)", "MacBook Pro (13-inch, 2017, Two Thunderbolt 3 ports)", "MacBook Pro (15-inch, 2016)", "MacBook Pro (13-inch, 2016, Four Thunderbolt 3 ports)", "MacBook Pro (13-inch, 2016, Two Thunderbolt 3 ports)", "MacBook Pro (Retina, 15-inch, Mid 2015)", "MacBook Pro (Retina, 15-inch, Mid 2015)", "MacBook Pro (Retina, 13-inch, Early 2015)", "MacBook Pro (Retina, 15-inch, Mid 2014)", "MacBook Pro (Retina, 15-inch, Mid 2014)", "MacBook Pro (Retina, 13-inch, Mid 2014)", "MacBook Pro (Retina, 15-inch, Late 2013)", "MacBook Pro (Retina, 15-inch, Late 2013)", "MacBook Pro (Retina, 15-inch, Early 2013)", "MacBook Pro (Retina, 13-inch, Late 2013)", "MacBook Pro (Retina, 13-inch, Early 2013)", "MacBook Pro (Retina, 15-inch, Mid 2012)", "MacBook Pro (15-inch, Mid 2012)", "MacBook Pro (Retina, 13-inch, Late 2012)", "MacBook Pro (13-inch, Mid 2012)", "MacBook Pro (17-inch, Late 2011)", "MacBook Pro (17-inch, Early 2011)", "MacBook Pro (15-inch, Late 2011)", "MacBook Pro (15-inch, Early 2011)", "MacBook Pro (13-inch, Late 2011)", "MacBook Pro (13-inch, Early 2011)", "MacBook Pro (17-inch, Mid 2010)", "MacBook Pro (15-inch, Mid 2010)", "MacBook Pro (13-inch, Mid 2010)", "MacBook Pro (17-inch, Mid 2009)", "MacBook Pro (17-inch, Early 2009)", "MacBook Pro (15-inch, Mid 2009)", "MacBook Pro (15-inch, 2.53GHz, Mid 2009)", "MacBook Pro (13-inch, Mid 2009)", "MacBook Pro (15-inch, Late 2008)", "MacBook Pro (17-inch, Early 2008)", "MacBook Pro (15-inch, Early 2008)"],
+      MacbookAir: ["MacBook Air (Retina, 13-inch, 2019)", "MacBook Air (Retina, 13-inch, 2018)", "MacBook Air (13-inch, 2017)", "MacBook Air (13-inch, Early 2015)", "MacBook Air (11-inch, Early 2015)", "MacBook Air (13-inch, Early 2014)", "MacBook Air (11-inch, Early 2014)", "MacBook Air (13-inch, Mid 2013)", "MacBook Air (11-inch, Mid 2013)", "MacBook Air (13-inch, Mid 2012)", "MacBook Air (11-inch, Mid 2012)", "MacBook Air (13-inch, Mid 2011)", "MacBook Air (11-inch, Mid 2011)", "MacBook Air (13-inch, Late 2010)", "MacBook Air (11-inch, Late 2010)", "MacBook Air (Mid 2009)"],
+    }
+
+    var deviceBySamsungCategory = {
+      Galaxy: ["Galaxy S10 Plus", "Galaxy S10", "Galaxy S10e", "Galaxy S9 Plus", "Galaxy S9"],
+      Note: [ "Galaxy Note 1", "Galaxy Note"]
+    }
+
+    var deviceByMicrosoftCategory = {
+      Xbox: ["Xbox 360", "Xbox One", "Xbox One S", "Xbox One X"]
+    }
+
+    var deviceBySonyCategory = {
+      PlayStation: ["PS3", "PS3 Slim", "PS4", "PS4 Pro"]
+    }
+
+    var deviceByNintendoCategory = {
+      Switch: ["Switch v1", "Switch v2", "Switch Lite"],
+      DS: ["3DS", "DS", , "WII", "Other"]
+    }
+
+    function getSpecficDevicesByDevice(value) {
+      var deviceByCategory;
+      switch(value) {
+        case "Apple":
+          deviceByCategory = deviceByAppleCategory;
+          break;
+        case "Samsung":
+          deviceByCategory = deviceBySamsungCategory;
+          break;
+        case "Microsoft":
+          deviceByCategory = deviceByMicrosoftCategory;
+          break;
+        case "Sony":
+          deviceByCategory = deviceBySonyCategory;
+          break;
+        case "Nintendo":
+          deviceByCategory = deviceByNintendoCategory;
+          break;
+      }
+      return deviceByCategory;
+    }
+
+    var deviceByCategory;
+
+    function changecat(value) {
+      if (value.length == 0) document.getElementById("deviceDropdown").innerHTML = "<option></option>";
+      else {
+
+        if (value == "Other") {
+          document.getElementById("brandColumn").innerHTML = "<input class='form-control' name='brand' placeholder='Brand *'' value='' />"
+          document.getElementById("deviceColumn").innerHTML = "<input class='form-control' name='device' placeholder='Device *'' value='' />"
+        }
+
+        var catOptions = "";
+        for (categoryId in deviceByBrand[value]) {
+          catOptions += "<option>" + deviceByBrand[value][categoryId] + "</option>";
+        }
+        deviceByCategory = getSpecficDevicesByDevice(value);
+        document.getElementById("deviceDropdown").innerHTML = catOptions;
+      }
+    }
+
+    function changeDevice(value) {
+      if (value.length == 0) document.getElementById("deviceDropdown").innerHTML = "<option></option>";
+      else {
+
+        if (value == "Other") {
+          document.getElementById("brandColumn").innerHTML = "<input class='form-control' name='brand' placeholder='Brand *'' value='' />"
+          document.getElementById("deviceColumn").innerHTML = "<input class='form-control' name='device' placeholder='Device *'' value='' />"
+        }
+
+        var catOptions = "";
+        for (categoryId in deviceByCategory[value]) {
+          catOptions += "<option>" + deviceByCategory[value][categoryId] + "</option>";
+        }
+        document.getElementById("specificDeviceDropdown").innerHTML = catOptions;
+      }
+    }
+
+    function changeSpecificDevice(value) {
+      if (value.length == 0) document.getElementById("deviceColumn").innerHTML = "<option></option>";
+      else {
+
+        if (value == "Other") {
+          document.getElementById("specificDeviceColumn").innerHTML = "<input class='form-control' name='device' placeholder='Device *'' value='' />"
+        }
+
+      }
+    }

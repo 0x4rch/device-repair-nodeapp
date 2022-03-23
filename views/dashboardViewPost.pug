@@ -1,0 +1,15 @@
+extends dashboardNav
+
+block layout-content
+  .container-fluid.mt-9
+      .col-xl-12.order-xl-1
+        .card.bg-secondary.shadow
+          .card-header.bg-white.border-0
+            .row.align-items-center
+              .col-8
+                h3.mb-0 #{post.device} | #{post.issue}
+          .card-body
+            form
+              h6.heading-small.text-muted.mb-4 #{post.issue}
+                p #{post.description} 
+              hr.my-4
